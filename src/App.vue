@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppTest from './components/AppTest.vue';
+import Nav from './components/Nav.vue';
 
 </script>
 
 <template>
-  <AppTest />
+  <Nav />
   <main class="mx-auto max-w-3xl p-6">
     <RouterView />
   </main>
