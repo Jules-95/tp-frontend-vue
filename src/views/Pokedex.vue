@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
-import { NPagination } from "naive-ui";
+import { NPagination, NButton } from "naive-ui";
 import PokeCard from "@/components/PokeCard.vue";
 import { chargerPokemons } from "@/api/pokeapi";
 
+import { useEquipeStore } from "@/stores/equipe";
+
 import type { PokemonResume } from "@/types/pokemon";
 
+const equipe = useEquipeStore();
 const pokemons = ref<PokemonResume[]>([]);
 
 // Pagination
@@ -36,11 +39,16 @@ onMounted(async () => {
 
   <div v-else>
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-      <PokeCard
+      <div
         v-for="pokemon in pokeAffiche"
         :key="pokemon.id"
-        :pokemon="pokemon"
-      />
+        class="flex flex-col gap-2"
+      >
+        <PokeCard :pokemon="pokemon" />
+        <NButton size="small" @click="equipe.ajouter(pokemon)">
+          Ajouter dans l'équipe
+        </NButton>
+      </div>
     </div>
 
     <div class="mt-6 flex justify-center">
