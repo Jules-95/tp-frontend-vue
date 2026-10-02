@@ -3,6 +3,8 @@ import { storeToRefs } from "pinia";
 import PokeCard from "@/components/PokeCard.vue";
 import { useEquipeStore } from "@/stores/equipe";
 
+import { NButton } from "naive-ui";
+
 const equipe = useEquipeStore();
 const { membres } = storeToRefs(equipe);
 </script>
@@ -15,6 +17,15 @@ const { membres } = storeToRefs(equipe);
   </p>
 
   <div v-else class="grid grid-cols-2 gap-4 sm:grid-cols-3">
-    <PokeCard v-for="pokemon in membres" :key="pokemon.id" :pokemon="pokemon" />
+    <div
+      v-for="pokemon in membres"
+      :key="pokemon.id"
+      class="flex flex-col gap-2"
+    >
+      <PokeCard :pokemon="pokemon" />
+      <NButton size="small" type="error" @click="equipe.retirer(pokemon.id)">
+        Retirer
+      </NButton>
+    </div>
   </div>
 </template>

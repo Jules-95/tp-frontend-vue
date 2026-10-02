@@ -17,5 +17,10 @@ export const useEquipeStore = defineStore("equipe", () => {
     return true;
   }
 
-  return { membres, fullTeam, ajouter };
+  // Retirer un poke de l'equipe (selon id)
+  function retirer(id: number) {
+    membres.value = membres.value.filter((p) => p.id !== id);
+  }
+
+  return { membres, fullTeam, ajouter, retirer };
 });
